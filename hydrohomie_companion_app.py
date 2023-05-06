@@ -1,6 +1,9 @@
 import serial
 from datetime import datetime
 import math
+import matplotlib
+matplotlib.use('TkAgg')
+import matplotlib.pyplot as plt
 
 #UNIX
 btser= serial.Serial("/dev/rfcomm0", baudrate=9600)
@@ -20,4 +23,13 @@ while(1):
     #save the data
     time_data.append(now)
     volume_data.append(volume_data_point)
+
+    if (now.second == 0):
+       timestamps = [datetime.timestamp(t) for t in time_data]
+       #plt.ion()
+       graph_vol = volume_data
+       #plt.plot([1, 2, 3], [1, 2, 3])
+       plt.plot(timestamps,graph_vol)
+       plt.show()
+
 
