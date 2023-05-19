@@ -12,11 +12,8 @@ btser= serial.Serial("/dev/rfcomm0", baudrate=9600)
 time_data = []
 volume_data = []
 while(1):
-
     now = datetime.now() #source 1 datetime library
     volume_data_point = int(btser.readline().decode()) #source 2 serial port
-
-
     #print to terminal
     print(now.strftime('%Y-%m-%d %H:%M:%S'),":",volume_data_point)
 

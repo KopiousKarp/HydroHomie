@@ -25,7 +25,7 @@ BluetoothSerial SerialBT;
 
 //Definitions for Flowmeter
 #define LED_BUILTIN 2
-#define SENSOR  13
+#define SENSOR  25
 
 long currentMillis = 0;
 long previousMillis = 0;
@@ -107,8 +107,8 @@ void loop() {
     Serial.print("mL / ");
     Serial.print(totalMilliLitres / 1000);
     Serial.println("L");
-    SerialBT.print(totalMilliLitres);
-    SerialBT.print("mL");
+    SerialBT.println(totalMilliLitres);
+    // SerialBT.println("mL");
   }
 
   if (Serial.available()) {
