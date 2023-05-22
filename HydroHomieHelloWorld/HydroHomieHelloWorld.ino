@@ -4,6 +4,8 @@
 
 //Definitions section for BT
 #include "BluetoothSerial.h"
+#include <FastLED.h>
+
 
 //#define USE_PIN // Uncomment this to use PIN during pairing. The pin is specified on the line below
 const char *pin = "1234"; // Change this to more secure PIN.
@@ -26,7 +28,11 @@ BluetoothSerial SerialBT;
 //Definitions for Flowmeter
 #define LED_BUILTIN 2
 #define SENSOR  25
+#define NUM_LEDS 1
+#define DATA_PIN 27
+#define CLOCK_PIN 22
 
+CRGB leds[NUM_LEDS];
 long currentMillis = 0;
 long previousMillis = 0;
 int interval = 1000;
@@ -70,6 +76,9 @@ void setup() {
   previousMillis = 0;
 
   attachInterrupt(digitalPinToInterrupt(SENSOR), pulseCounter, FALLING);
+  FastLED.addLeds<SK6812, DATA_PIN, RGB>(leds, NUM_LEDS);  // GRB ordering is typical
+  leds[0] = 0xf00000;
+  FastLED.show();
 }
 
 void loop() {
