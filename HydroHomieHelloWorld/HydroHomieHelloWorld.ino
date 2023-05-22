@@ -77,14 +77,14 @@ void setup() {
 
   attachInterrupt(digitalPinToInterrupt(SENSOR), pulseCounter, FALLING);
   FastLED.addLeds<SK6812, DATA_PIN, RGB>(leds, NUM_LEDS);  // GRB ordering is typical
-  leds[0] = 0xf00000;
+  leds[0] = 0x00f000;
   FastLED.show();
 }
 
 void loop() {
   currentMillis = millis();
   if (currentMillis - previousMillis > interval) {
-    
+
     pulse1Sec = pulseCount;
     pulseCount = 0;
 
@@ -103,7 +103,7 @@ void loop() {
 
     // Add the millilitres passed in this second to the cumulative total
     totalMilliLitres += flowMilliLitres;
-    
+
     // Print the flow rate for this second in litres / minute
     Serial.print("Flow rate: ");
     Serial.print(int(flowRate));  // Print the integer part of the variable
@@ -118,6 +118,10 @@ void loop() {
     Serial.println("L");
     SerialBT.println(totalMilliLitres);
     // SerialBT.println("mL");
+    if(totalMilliLitres > 500){
+      leds[0] = 0xf00000;
+      FastLED.show();
+    }// if totalMills > 500
   }
 
   if (Serial.available()) {
