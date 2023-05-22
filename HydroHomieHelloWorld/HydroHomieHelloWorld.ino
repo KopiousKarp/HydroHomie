@@ -23,8 +23,6 @@ String device_name = "ESP32 HydroHomie";
 BluetoothSerial SerialBT;
 
 
-
-
 //Definitions for Flowmeter
 #define LED_BUILTIN 2
 #define SENSOR  25
@@ -118,10 +116,10 @@ void loop() {
     Serial.println("L");
     SerialBT.println(totalMilliLitres);
     // SerialBT.println("mL");
-    if(totalMilliLitres > 500){
+    if(totalMilliLitres > 200){
       leds[0] = 0xf00000;
       FastLED.show();
-    }// if totalMills > 500
+    }// if totalMills > 200
   }
 
   if (Serial.available()) {
